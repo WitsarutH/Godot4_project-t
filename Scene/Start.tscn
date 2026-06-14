@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://woy2l3qrtgwf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bupin"]
+font_size = 50
+outline_size = 3
+outline_color = Color(0.03529412, 0.14901961, 1, 1)
+
+[node name="Label" type="Label" unique_id=1200650217]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -34.5
+offset_right = 105.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Project T"
+label_settings = SubResource("LabelSettings_bupin")
