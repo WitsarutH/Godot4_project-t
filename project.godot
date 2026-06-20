@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ProjectT"
-run/main_scene="uid://dp2233rdweivl"
+run/main_scene="uid://cw3an4h7hplbd"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [physics]
