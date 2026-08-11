@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://kwsbjqa6x87l"]
+
+[ext_resource type="Texture2D" uid="uid://bhy45883fuw3g" path="res://Assets/Player/playerRed_up1.png" id="1_o4yrx"]
+[ext_resource type="Texture2D" uid="uid://crqg8db4ch35o" path="res://Assets/Enemy/enemyFloating_1.png" id="2_iq7mn"]
+
+[node name="BattleScene" type="Node2D" unique_id=1999808844]
+
+[node name="PlayerSide" type="Node2D" parent="." unique_id=1699598098]
+
+[node name="Player1" type="Sprite2D" parent="PlayerSide" unique_id=170809048]
+position = Vector2(250, 360)
+scale = Vector2(3, 3)
+texture = ExtResource("1_o4yrx")
+
+[node name="HPBar" type="ProgressBar" parent="PlayerSide/Player1" unique_id=1233333204]
+offset_left = -50.0
+offset_top = -60.0
+offset_right = 50.0
+offset_bottom = -50.0
+value = 100.0
+show_percentage = false
+
+[node name="EnemySide" type="Node2D" parent="." unique_id=852851291]
+
+[node name="Enemy1" type="Sprite2D" parent="EnemySide" unique_id=1892963377]
+position = Vector2(1000, 360)
+scale = Vector2(3, 3)
+texture = ExtResource("2_iq7mn")
+
+[node name="HPBar" type="ProgressBar" parent="EnemySide/Enemy1" unique_id=383822965]
+offset_left = -50.0
+offset_top = -60.0
+offset_right = 50.0
+offset_bottom = -50.0
+value = 100.0
+show_percentage = false
+
+[node name="UI" type="Node2D" parent="." unique_id=2116090310]
