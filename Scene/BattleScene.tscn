@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://kwsbjqa6x87l"]
 
+[ext_resource type="Script" uid="uid://d1q0aervstmsd" path="res://Scripts/BattleManager.gd" id="1_3ptm4"]
 [ext_resource type="Texture2D" uid="uid://bhy45883fuw3g" path="res://Assets/Player/playerRed_up1.png" id="1_o4yrx"]
 [ext_resource type="Texture2D" uid="uid://crqg8db4ch35o" path="res://Assets/Enemy/enemyFloating_1.png" id="2_iq7mn"]
+[ext_resource type="Script" uid="uid://bt254cidvfma1" path="res://Scripts/Unit.gd" id="2_uette"]
 
 [node name="BattleScene" type="Node2D" unique_id=1999808844]
+script = ExtResource("1_3ptm4")
 
 [node name="PlayerSide" type="Node2D" parent="." unique_id=1699598098]
 
@@ -11,6 +14,8 @@
 position = Vector2(250, 360)
 scale = Vector2(3, 3)
 texture = ExtResource("1_o4yrx")
+script = ExtResource("2_uette")
+unit_name = "Knight"
 
 [node name="HPBar" type="ProgressBar" parent="PlayerSide/Player1" unique_id=1233333204]
 offset_left = -50.0
@@ -26,6 +31,9 @@ show_percentage = false
 position = Vector2(1000, 360)
 scale = Vector2(3, 3)
 texture = ExtResource("2_iq7mn")
+script = ExtResource("2_uette")
+unit_name = "Goblin"
+max_hp = 80
 
 [node name="HPBar" type="ProgressBar" parent="EnemySide/Enemy1" unique_id=383822965]
 offset_left = -50.0
