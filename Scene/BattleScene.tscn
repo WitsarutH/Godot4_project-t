@@ -4,6 +4,26 @@
 [ext_resource type="Texture2D" uid="uid://bhy45883fuw3g" path="res://Assets/Player/playerRed_up1.png" id="1_o4yrx"]
 [ext_resource type="Texture2D" uid="uid://crqg8db4ch35o" path="res://Assets/Enemy/enemyFloating_1.png" id="2_iq7mn"]
 [ext_resource type="Script" uid="uid://bt254cidvfma1" path="res://Scripts/Unit.gd" id="2_uette"]
+[ext_resource type="Texture2D" uid="uid://83rtlihh8a77" path="res://Assets/Player/playerRed_up2.png" id="4_srxwu"]
+[ext_resource type="Texture2D" uid="uid://dv2in4jworx05" path="res://Assets/Enemy/enemyFloating_2.png" id="6_6ytfs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ytfs"]
+bg_color = Color(0.372823, 0.6925243, 0.23998666, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45peo"]
+bg_color = Color(0.37254903, 0.69411767, 0.23921569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr501"]
+bg_color = Color(0.37254903, 0.69411767, 0.23921569, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytfs"]
+size = Vector2(50, 50)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8cx5a"]
+bg_color = Color(0.37254903, 0.69411767, 0.23921569, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45peo"]
+size = Vector2(50, 50)
 
 [node name="BattleScene" type="Node2D" unique_id=1999808844]
 script = ExtResource("1_3ptm4")
@@ -11,24 +31,43 @@ script = ExtResource("1_3ptm4")
 [node name="PlayerSide" type="Node2D" parent="." unique_id=1699598098]
 
 [node name="Player1" type="Sprite2D" parent="PlayerSide" unique_id=170809048]
-position = Vector2(250, 360)
+position = Vector2(200, 300)
 scale = Vector2(3, 3)
 texture = ExtResource("1_o4yrx")
 script = ExtResource("2_uette")
 unit_name = "Knight"
 
 [node name="HPBar" type="ProgressBar" parent="PlayerSide/Player1" unique_id=1233333204]
-offset_left = -50.0
-offset_top = -60.0
-offset_right = 50.0
-offset_bottom = -50.0
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_6ytfs")
+value = 100.0
+show_percentage = false
+
+[node name="Player2" type="Sprite2D" parent="PlayerSide" unique_id=1151903978]
+position = Vector2(200, 500)
+scale = Vector2(3, 3)
+texture = ExtResource("4_srxwu")
+script = ExtResource("2_uette")
+unit_name = "Mage"
+max_hp = 70
+atk = 50
+
+[node name="HPBar" type="ProgressBar" parent="PlayerSide/Player2" unique_id=1931345655]
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_45peo")
 value = 100.0
 show_percentage = false
 
 [node name="EnemySide" type="Node2D" parent="." unique_id=852851291]
 
 [node name="Enemy1" type="Sprite2D" parent="EnemySide" unique_id=1892963377]
-position = Vector2(1000, 360)
+position = Vector2(1050, 300)
 scale = Vector2(3, 3)
 texture = ExtResource("2_iq7mn")
 script = ExtResource("2_uette")
@@ -36,12 +75,41 @@ unit_name = "Goblin"
 max_hp = 80
 
 [node name="HPBar" type="ProgressBar" parent="EnemySide/Enemy1" unique_id=383822965]
-offset_left = -50.0
-offset_top = -60.0
-offset_right = 50.0
-offset_bottom = -50.0
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_nr501")
 value = 100.0
 show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="EnemySide/Enemy1" unique_id=504278084]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySide/Enemy1/Area2D" unique_id=502572961]
+shape = SubResource("RectangleShape2D_6ytfs")
+
+[node name="Enemy2" type="Sprite2D" parent="EnemySide" unique_id=1137083553]
+position = Vector2(1050, 500)
+scale = Vector2(3, 3)
+texture = ExtResource("6_6ytfs")
+script = ExtResource("2_uette")
+unit_name = "Orc"
+max_hp = 120
+atk = 35
+
+[node name="HPBar" type="ProgressBar" parent="EnemySide/Enemy2" unique_id=451660211]
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_8cx5a")
+value = 100.0
+show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="EnemySide/Enemy2" unique_id=1802069165]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySide/Enemy2/Area2D" unique_id=138724492]
+shape = SubResource("RectangleShape2D_45peo")
 
 [node name="UI" type="Node2D" parent="." unique_id=2116090310]
 

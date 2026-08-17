@@ -1,44 +1,81 @@
 extends Node2D
 
-@onready var player = $PlayerSide/Player1
-@onready var enemy = $EnemySide/Enemy1
-@onready var attack_button = $UI/AttackButton
-
+var player_team = []
+var enemy_team = []
+var selected_target = null
 var is_player_turn = true
 
-func _ready() -> void:
-	print("=== Battle Start ===")
+@onready var attack_button = $UI/AttackButton
+
+func _ready():
+	player_team.append($PlayerSide/Player1)
+	player_team.append($PlayerSide/Player2)
+	enemy_team.append($EnemySide/Enemy1)
+	enemy_team.append($EnemySide/Enemy2)
+	
+	# เชื่อม signal คลิกของศัตรูแต่ละตัว
+	for enemy in enemy_team:
+		enemy.clicked.connect(_on_enemy_clicked)
+	
 	attack_button.pressed.connect(_on_attack_pressed)
+	attack_button.disabled = true
+	print("=== Battle Start ===")
+	print("[ เลือกเป้าหมายที่จะโจมตี ]")
+
+func _on_enemy_clicked(unit):
+	# รับเป้าหมายที่คลิกเลือก
+	if not is_player_turn or unit.is_dead():
+		return
+	selected_target = unit
+	attack_button.disabled = false
+	print("เลือกเป้าหมาย: " + unit.unit_name)
 
 func _on_attack_pressed():
-	if not is_player_turn:
+	if not is_player_turn or selected_target == null:
 		return
 	
-	# ผู้เล่นโจมตี
 	is_player_turn = false
 	attack_button.disabled = true
-	player.attack(enemy)
 	
-	if enemy.is_dead():
+	var attacker = get_first_alive(player_team)
+	attacker.attack(selected_target)
+	selected_target = null
+	
+	if not has_alive(enemy_team):
 		end_battle("Player")
 		return
 	
-	# รอแล้วศัตรูโจมตี
 	await get_tree().create_timer(1.0).timeout
 	enemy_turn()
 
 func enemy_turn():
 	print("[ เทิร์นศัตรู ]")
-	enemy.attack(player)
+	for enemy in enemy_team:
+		if enemy.is_dead():
+			continue
+		var target = get_first_alive(player_team)
+		if target:
+			enemy.attack(target)
+		await get_tree().create_timer(0.5).timeout
 	
-	if player.is_dead():
+	if not has_alive(player_team):
 		end_battle("Enemy")
 		return
 	
-	# คืนเทิร์นให้ผู้เล่น
 	is_player_turn = true
-	attack_button.disabled = false
-	print("[ เทิร์นผู้เล่น — กดโจมตี ]")
+	print("[ เลือกเป้าหมายที่จะโจมตี ]")
+
+func get_first_alive(team):
+	for unit in team:
+		if not unit.is_dead():
+			return unit
+	return null
+
+func has_alive(team):
+	for unit in team:
+		if not unit.is_dead():
+			return true
+	return false
 
 func end_battle(winner):
 	print("=== จบการต่อสู้ ===")
