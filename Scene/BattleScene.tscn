@@ -119,3 +119,28 @@ offset_top = 650.0
 offset_right = 1230.0
 offset_bottom = 700.0
 text = "Attack"
+
+[node name="ResultScreen" type="CanvasLayer" parent="UI" unique_id=958857146]
+
+[node name="Panel" type="Panel" parent="UI/ResultScreen" unique_id=1311605640]
+offset_left = 440.0
+offset_top = 260.0
+offset_right = 840.0
+offset_bottom = 460.0
+
+[node name="ResultLabel" type="Label" parent="UI/ResultScreen/Panel" unique_id=1356580410]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 30.0
+offset_right = 300.0
+offset_bottom = 70.0
+text = "ผลการต่อสู้"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UI/ResultScreen/Panel" unique_id=598177013]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 120.0
+offset_right = 275.0
+offset_bottom = 170.0
+text = "เริ่มใหม่"

@@ -6,6 +6,9 @@ var selected_target = null
 var is_player_turn = true
 
 @onready var attack_button = $UI/AttackButton
+@onready var result_screen = $UI/ResultScreen
+@onready var result_label = $UI/ResultScreen/Panel/ResultLabel
+@onready var restart_button = $UI/ResultScreen/Panel/RestartButton
 
 func _ready():
 	player_team.append($PlayerSide/Player1)
@@ -19,8 +22,19 @@ func _ready():
 	
 	attack_button.pressed.connect(_on_attack_pressed)
 	attack_button.disabled = true
+	
+	# ซ่อน ResultScreen ตอนเริ่มเกม
+	result_screen.visible = false
+	
+	# เชื่อมปุ่ม Restart
+	restart_button.pressed.connect(_on_restart_pressed)
+
 	print("=== Battle Start ===")
 	print("[ เลือกเป้าหมายที่จะโจมตี ]")
+
+func _on_restart_pressed():
+	# โหลด Scene ใหม่ทั้งหมด
+	get_tree().reload_current_scene()
 
 func _on_enemy_clicked(unit):
 	# รับเป้าหมายที่คลิกเลือก
@@ -81,3 +95,8 @@ func end_battle(winner):
 	print("=== จบการต่อสู้ ===")
 	print(winner + " ชนะ!")
 	attack_button.disabled = true
+	result_screen.visible = true
+	if winner == "Player":
+		result_label.text = "🏆 ชนะ!"
+	else:
+		result_label.text = "💀 แพ้!"
